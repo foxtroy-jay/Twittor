@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ContractData } from 'drizzle-react-components';
 import TweetForm from './TweetForm';
-import NewComponent from './NewComponent';
+import NewComponent from './SingleTweet';
 
 export default class tweets extends React.Component {
   render() {

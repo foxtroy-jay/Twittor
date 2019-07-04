@@ -9,9 +9,10 @@ import options from './drizzleOptions';
 
 const drizzle = new Drizzle(options);
 export default class tweets extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super();
     this.state = { userAddress: '' };
+    this.contracts = context;
   }
   async componentDidMount() {
     const accounts = await drizzle.web3.eth.getAccounts();
@@ -23,6 +24,7 @@ export default class tweets extends React.Component {
     const getNumTweetsFirstKey = Object.keys(
       this.props.Twittor.getNumTweets
     )[1];
+
     if (this.props.Twittor.getNumTweets[getNumTweetsFirstKey]) {
       length = this.props.Twittor.getNumTweets[getNumTweetsFirstKey].value;
     }
@@ -31,11 +33,9 @@ export default class tweets extends React.Component {
       mapArray.length = length;
       mapArray.fill(1);
     }
-
     return (
       <div className="App">
         <ToastContainer />
-
         <div>
           <h1>TWEETS</h1>
           <TweetForm contract="Twittor" method="addTweetStruct" />
@@ -46,6 +46,7 @@ export default class tweets extends React.Component {
                   <SingleTweet
                     address={this.state.userAddress}
                     index={idx}
+                    props={this.props}
                     key={idx}
                   />
                 );
